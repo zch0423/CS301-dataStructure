@@ -98,3 +98,79 @@ void seqList<elemType>::erase(int i) {
 }
 
 // 单链表类
+template <class elemType>
+typename sLinkList<elemType>::node *sLinkList<elemType>::move(int i) const {
+    //向前移动i个，对head而言移动i+1次
+    node * p = head;
+    while(i-- >=0){
+        p = p->next;
+    }
+    return p;
+}
+
+template <class elemType>
+sLinkList<elemType>::sLinkList() {
+    head = new node;
+    currentLength = 0;
+}
+
+template <class elemType>
+void sLinkList<elemType>::clear() {
+    node *p = head->next, *temp;
+    while(p!=nullptr){
+        temp = p->next;
+        delete p;
+        p = temp;
+    }
+    head->next = nullptr;
+    currentLength = 0;
+}
+
+template <class elemType>
+void sLinkList<elemType>::insert(int i, const elemType &x) {
+    node* p = move(i-1);
+    node* temp = new node(x, p->next);
+    p->next = temp;
+    ++currentLength;
+}
+
+template <class elemType>
+void sLinkList<elemType>::remove(int i) {
+    node* p = move(i-1);
+    node* temp;
+    temp = p->next;
+    p->next = temp->next;
+    delete temp;
+    --currentLength;
+}
+
+template <class elemType>
+int sLinkList<elemType>::search(const elemType &x) const {
+    node* p = head->next;
+    int count = 0;
+    while(p!=nullptr){
+        if(p->data==x){
+            return count;
+        }
+        ++count;
+        p = p->next;
+    }
+    return -1;
+}
+
+template <class elemType>
+elemType sLinkList<elemType>::visit(int i) const {
+    return move(i)->data;
+}
+
+template <class elemType>
+void sLinkList<elemType>::traverse() const {
+    cout<<endl;
+    node* p=head->next;
+    while(p!= nullptr){
+        cout<<p->data<<"  ";
+        p = p->next;
+    }
+    cout<<endl;
+}
+
