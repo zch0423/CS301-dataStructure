@@ -9,6 +9,7 @@ Cpp implementation codes of data structures in course CS031
 - sLinkList 单链表
 - dLinkList 双链表
 - cLinkList 循环链表
+
 **methods**
 - void clear()
 - int length()
