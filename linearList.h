@@ -5,6 +5,7 @@ content: declaration of Linear List structure including seqList linklist
 #ifndef _LIST_H
 #define _LIST_H
 
+// ADT
 template <class elemType>
 class list{
     public:
@@ -18,9 +19,10 @@ class list{
     virtual ~list()= default;
 };
 
+
+// 顺序表
 template<class elemType>
 class seqList:public list<elemType>{
-    // 顺序表
     private:
         elemType* data;
         int currentLength;
@@ -40,9 +42,10 @@ class seqList:public list<elemType>{
         void traverse()const;
 };
 
+
+// 单链表
 template <class elemType>
 class sLinkList:public list<elemType>{
-    // 单链表
 private:
     struct node{
         elemType data;
@@ -65,6 +68,7 @@ public:
     elemType visit(int i)const;
     void traverse()const;
 };
+
 
 // 双链表
 template <class elemType>
@@ -97,6 +101,38 @@ public:
     elemType visit(int i)const;
     void traverse()const;
 
+};
+
+
+// 循环链表
+template <class elemType>
+class cLinkList:public list<elemType>{
+private:
+    struct node{
+        node* next = nullptr;
+        node* prev = nullptr;
+        elemType data;
+        explicit node(const elemType&x, node*p= nullptr, node*n= nullptr){
+            data = x;
+            prev = p;
+            next = n;
+        }
+        node(){next= nullptr; prev= nullptr;}
+        ~node()= default;
+    };
+    int currentLength = 0;
+    node *head = nullptr;
+    node* move(int i) const;
+public:
+    cLinkList();
+    ~cLinkList(){clear();delete head;}
+    void clear();
+    int length()const {return currentLength;}
+    void insert(int i, const elemType& x);
+    void remove(int i);
+    int search(const elemType&x)const;
+    elemType visit(int i)const;
+    void traverse()const;
 };
 
 #endif

@@ -254,3 +254,75 @@ void dLinkList<elemType>::traverse() const {
 
 
 //循环链表
+template <class elemType>
+typename cLinkList<elemType>::node* cLinkList<elemType>::move(int i) const {
+    node* p = head;
+    while(i-- >=0){
+        p = p->next;
+    }
+    return p;
+}
+
+template <class elemType>
+cLinkList<elemType>::cLinkList() {
+    head = new node;
+    currentLength = 0;
+}
+
+template <class elemType>
+void cLinkList<elemType>::clear() {
+    node* p = head->next;
+    node* temp;
+    while(p!=nullptr){
+        temp = p->next;
+        delete p;
+        p = temp;
+    }
+}
+
+template <class elemType>
+void cLinkList<elemType>::insert(int i, const elemType &x) {
+    node* p = move(i-1);
+    node* temp = new node(x, p, p->next);
+    p->next->prev = temp;
+    p->next = temp;
+}
+
+template <class elemType>
+void cLinkList<elemType>::remove(int i) {
+    node* p = move(i);
+    node* temp = p->next;
+    temp->prev = p->prev;
+    p->prev->next = temp;
+    delete p;
+}
+
+template <class elemType>
+int cLinkList<elemType>::search(const elemType &x) const {
+    node* p = head->next;
+    int count=0;
+    while(p!=nullptr){
+        if(p->data==x){
+            return count;
+        }
+        ++count;
+        p = p->next;
+    }
+    return -1;
+}
+
+template <class elemType>
+elemType cLinkList<elemType>::visit(int i) const {
+    return move(i)->data;
+}
+
+template <class elemType>
+void cLinkList<elemType>::traverse() const {
+    cout<<endl;
+    node* p = head->next;
+    while(p!= nullptr){
+        cout<<p->data<<"  ";
+        p = p->next;
+    }
+    cout<<endl;
+}
