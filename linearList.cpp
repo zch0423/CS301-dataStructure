@@ -97,6 +97,7 @@ void seqList<elemType>::erase(int i) {
     currentLength -= count;
 }
 
+
 // 单链表类
 template <class elemType>
 typename sLinkList<elemType>::node *sLinkList<elemType>::move(int i) const {
@@ -174,3 +175,82 @@ void sLinkList<elemType>::traverse() const {
     cout<<endl;
 }
 
+
+// 双链表
+template <class elemType>
+typename dLinkList<elemType>::node* dLinkList<elemType>::move(int i) const {
+    node* p = head;
+    while(i-- >=0){p=p->next;}
+    return p;
+}
+
+template <class elemType>
+dLinkList<elemType>::dLinkList() {
+    head = new node;
+    tail = new node;
+    head->next = tail;
+    tail->prev = head;
+    currentLength = 0;
+}
+
+template <class elemType>
+void dLinkList<elemType>::clear() {
+    node* p = head->next;
+    node* temp;
+    while(p!=tail){
+        temp = p->next;
+        delete p;
+        p = temp;
+    }
+}
+
+template <class elemType>
+void dLinkList<elemType>::insert(int i, const elemType &x) {
+    node* p = move(i-1);
+    node* target = new node(x, p, p->next);
+    p->next->prev = target;
+    p->next = target;
+    ++currentLength;
+}
+
+template <class elemType>
+void dLinkList<elemType>::remove(int i) {
+    node* p = move(i-1);
+    node* temp = p->next;
+    p->next = temp->next;
+    temp->next->prev = p;
+    delete temp;
+}
+
+template <class elemType>
+int dLinkList<elemType>::search(const elemType &x) const {
+    node* p = head->next;
+    int count = 0;
+    while(p!=tail){
+        if(p->data==x){
+            return count;
+        }
+        p=p->next;
+        ++count;
+    }
+    return -1;
+}
+
+template <class elemType>
+elemType dLinkList<elemType>::visit(int i) const {
+    return move(i)->data;
+}
+
+template <class elemType>
+void dLinkList<elemType>::traverse() const {
+    cout<<endl;
+    node* p = head->next;
+    while(p!=tail){
+        cout<<p->data<<"  ";
+        p = p->next;
+    }
+    cout<<endl;
+}
+
+
+//循环链表

@@ -56,7 +56,7 @@ private:
     node * move(int i)const; // 返回第i个结点的地址
 public:
     sLinkList();
-    ~sLinkList(){clear();delete[]head};
+    ~sLinkList(){clear();delete head;}
     void clear();
     int length()const {return currentLength;}
     void insert(int i, const elemType& x);
@@ -65,4 +65,38 @@ public:
     elemType visit(int i)const;
     void traverse()const;
 };
+
+// 双链表
+template <class elemType>
+class dLinkList:public list<elemType>{
+private:
+    struct node{
+        elemType data;
+        node* prev = nullptr;
+        node* next = nullptr;
+        explicit node(const elemType&x, node* p = nullptr, node* n= nullptr){
+            data = x;
+            prev = p;
+            next = n;
+        }
+        node(){prev= nullptr;next= nullptr;}
+        ~node()= default;
+    };
+    node * head;
+    node * tail;
+    int currentLength;
+    node* move(int i)const;
+public:
+    dLinkList();
+    ~dLinkList(){clear();delete head; delete tail;}
+    void clear();
+    int length()const {return currentLength;}
+    void insert(int i, const elemType& x);
+    void remove(int i);
+    int search(const elemType&x)const;
+    elemType visit(int i)const;
+    void traverse()const;
+
+};
+
 #endif
