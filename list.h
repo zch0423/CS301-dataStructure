@@ -2,8 +2,8 @@
 filename: linearList.h
 content: declaration of Linear List structure including seqList linklist
 */
-#ifndef _LIST_H
-#define _LIST_H
+#ifndef CLIONPROJECT_LINEAR_H
+#define CLIONPROJECT_LINEAR_H
 
 // ADT
 template <class elemType>

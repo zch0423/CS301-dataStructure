@@ -3,7 +3,7 @@ filename: linearList.cpp
 content: implementation of linear list structure defined in linearList.h
 */
 #include <iostream>
-#include "linearList.h"
+#include "list.h"
 using namespace std;
 
 // implementation of seqList
