@@ -12,12 +12,39 @@ Cpp implementation codes of data structures in course CS031
 
 **methods**
 - void clear()
-- int length()
-- void insert(int i, const elemType&x)
+- int length()const;
+- void insert(int i, const T&x)
 - void remove(int i)
-- int search(const elemType&x)
-- elemType visit(int i)
-- void traverse()
+- int search(const T&x)const;
+- elemType visit(int i)const;
+- void traverse()const;
+
+## Stack
+- seqStack
+- linkStack
+
+methods
+- bool isEmpty()const;
+- void push(const T& temp);
+- T pop();
+- T top()const;
+
+## Queue
+- seqQueue
+- linkQueue
+
+methods
+- bool isEmpty()const;
+- void enQueue(const T&elem);
+- T deQueue();
+- T getHead()const;
+
+## Tree
+- seqTree
+- linkTree
+
+methods
+
 
 # Reference
 数据结构：思想与实现，上海交通大学出版社
