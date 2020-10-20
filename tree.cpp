@@ -18,7 +18,7 @@ binaryTree<T>::~binaryTree(){
 }
 
 template<typename T>
-void binaryTree<T>::clear(node*&t){
+void binaryTree<T>::clear(binaryTree<T>::node*&t){
     if(t==nullptr){
         return;
     }
@@ -47,7 +47,7 @@ T binaryTree<T>::root(T flag )const{
 }
 
 template<typename T>
-void binaryTree<T>::preOrder(node*t)const{
+void binaryTree<T>::preOrder(binaryTree<T>::node*t)const{
     if(t==nullptr ){
         return;
     }
@@ -64,7 +64,7 @@ void binaryTree<T>::preOrder()const{
 }
 
 template<typename T>
-void binaryTree<T>::midOrder(node *t)const{
+void binaryTree<T>::midOrder(binaryTree<T>::node *t)const{
     if(t==nullptr ){
         return;
     }
@@ -81,7 +81,7 @@ void binaryTree<T>::midOrder()const{
 }
 
 template<typename T>
-void binaryTree<T>::postOrder(node*t)const{
+void binaryTree<T>::postOrder(binaryTree<T>::node*t)const{
     if(t==nullptr ){
         return;
     }
@@ -115,7 +115,7 @@ void binaryTree<T>::levelOrder()const{
 }
 
 template<typename T>
-binaryTree<T>::node* binaryTree<T>::find(const T&x, node*t)const{
+binaryTree<T>::node* binaryTree<T>::find(const T&x, binaryTree<T>::node*t)const{
    node * temp;
    if(t==nullptr ){
        return;
@@ -207,3 +207,34 @@ void printTree(const binaryTree<T>&t, T flag){
         }
     }
 }
+
+template<typename T>
+int binaryTree<T>::size(binaryTree<T>::node*t)const{
+    if(t==nullptr )return 0;
+    return 1+size(t->left )+size(t->right );
+}
+
+template<typename T>
+int binaryTree<T>::size()const{
+    return size(r);
+}
+
+template<typename T>
+int binaryTree<T>::height(binaryTree<T>::node*t)const{
+    if(t==nullptr ){
+        return 0;
+    }
+    int lh, rh;
+    lh = height(t->left );
+    rh = height(t->right );
+    return 1+(lh>rh?lh:rh);
+}
+
+template<typename T>
+int binaryTree<T>::height()const{
+    return height(r);
+}
+
+//TODO
+//三种遍历的非递归实现
+

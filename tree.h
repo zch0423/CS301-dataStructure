@@ -72,6 +72,8 @@ struct node{
     void preOrder(node*t)const;
     void midOrder(node*t)const;
     void postOrder(node*t)const;
+    int size(node* t)const;
+    int height(node* t)const;
 public:
     binaryTree(){r= nullptr;}
     explicit binaryTree(const T& x){r=new node(x);}
@@ -89,6 +91,8 @@ public:
     void levelOrder()const;
     void createTree(T flag);
     T parent(const T&x, T flag)const{return flag;} // node中没有指向父节点的指针 
+    int size()const;
+    int height()const;
 };
 
 
