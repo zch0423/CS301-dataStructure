@@ -23,7 +23,7 @@ class seqStack:public stack<T>{
 private:
     T* data;
     int maxSize;
-    T topP;
+    int topP;
     void doubleSpace();
 public:
     explicit seqStack(int initSize=10);

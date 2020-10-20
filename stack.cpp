@@ -77,7 +77,7 @@ bool linkStack<T>::isEmpty() const {
 
 template <typename T>
 void linkStack<T>::push(const T &temp) {
-    topP = new node(temp, topP)
+    topP = new node(temp, topP);
 }
 
 template <typename T>
