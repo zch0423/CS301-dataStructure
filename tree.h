@@ -49,7 +49,7 @@ public:
 // linked Binary tree
 template <typename T>
 class binaryTree:public btree<T>{
-    friend printTree(const binaryTree& t, T flag );
+    friend printTree(const binaryTree<T>& t, T flag );
 private:
 struct node{
     T data;
