@@ -24,8 +24,8 @@ void binaryTree<T>::clear(binaryTree<T>::node*&t){
     }
     clear(t->left );
     clear(t->right );
-    delete root;
-    root = nullptr;
+    delete t;
+    t = nullptr;
 }
 
 template<typename T>

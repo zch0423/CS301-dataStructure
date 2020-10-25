@@ -40,11 +40,25 @@ methods
 - T getHead()const;
 
 ## Tree
-- seqTree
-- linkTree
+- seqBinaryTree
+- binaryTree
 
 methods
-
+- void clear()const;
+- bool isEmpty()const;
+- T root(T flag)const;
+- T lchild(const T&x ,T flag )const;
+- T rchild(const T&x, T flag )const;
+- void delLeft(const T&x);
+- void delRight(const T&x);
+- void preOrder()const;
+- void midOrder()const;
+- void postOrder()const;
+- void levelOrder()const;
+- void createTree(T flag );
+- int size()const;
+- int height()const;
+- friend void printTree(const binaryTree<T>&t, T flag );
 
 # Reference
 数据结构：思想与实现，上海交通大学出版社
