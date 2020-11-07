@@ -66,6 +66,13 @@ struct node{
     }
     ~node(){}
 };
+struct StNode{
+    //为遍历的非递归实现创建
+    node* n;
+    int timesPop;
+    StNode(node* N=nullptr):n(N),timesPop(0){}
+};
+
     node* r;
     node* find(const T& x, node* t)const;
     void clear(node* &t);
@@ -93,6 +100,10 @@ public:
     T parent(const T&x, T flag)const{return flag;} // node中没有指向父节点的指针 
     int size()const;
     int height()const;
+    // 遍历的非递归实现
+    void preOrderNRecur()const;
+    void midOrderNRecur()const;
+    void postOrderNRecur()const;
 };
 
 

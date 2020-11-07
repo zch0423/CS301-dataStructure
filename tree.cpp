@@ -7,11 +7,107 @@ Content: implementation of tree especially binaryTree
 
 
 #include "tree.h"
-#include "queue.h"
-#include "queue.cpp"
 #include<iostream>
 
 using namespace std;
+// 队列 遍历用
+template<typename T>
+class linkQueue{
+private:
+    struct node{
+        T data;
+        node* next;
+        node(const T& d, node* n=nullptr){
+            data = d;
+            next = n;
+        }
+        node(){
+            next = nullptr;
+        }
+        ~node()= default;
+    };
+    node* front;
+    node* rear;
+public:
+    linkQueue(){
+        front=rear=nullptr;
+    }
+    ~linkQueue(){
+        node* temp;
+        while(!isEmpty()){
+            temp = front;
+            front = front->next;
+            delete temp;
+        }
+    }
+    bool isEmpty()const{
+        return front==nullptr;
+    }
+    void enQueue(const T&d){
+        if(rear==nullptr ){
+            rear = new node(d);
+            front = rear;
+        } else{
+            rear = rear->next = new node(d);
+        }
+    }
+    T deQueue(){
+        node * temp = front;
+        T d = temp->data;
+        front = front->next;
+        if(front==nullptr ){
+            rear = nullptr;
+        }
+        delete temp;
+        return d;
+    }
+};
+
+// 栈 遍历用
+template<typename T>
+class linkStack{
+    private:
+        struct node{
+            T data;
+            node* next;
+            node(const T&d, node*n=nullptr ){
+                data=d;
+                next = n;
+            }
+            node(){
+                next=nullptr;
+            }
+            ~node()=default;
+        }
+        node* topP;
+    public:
+        linkStack(){
+            topP = nullptr;
+        }
+        ~linkStack(){
+            node* temp;
+            while(!isEmpty()){
+                temp = topP;
+                topP = topP->next;
+                delete temp;
+            }
+        }
+        bool isEmpty()const{
+            return topP == nullptr;
+        }
+        T pop(){
+            node* temp = topP;
+            T result = temp->data;
+            topP = topP->next;
+            delete temp;
+            return result;
+        }
+        void push(const T& d){
+            topP = new node(d, topP);
+        }
+};
+
+
 template <typename T>
 binaryTree<T>::~binaryTree(){
     clear();
@@ -235,6 +331,66 @@ int binaryTree<T>::height()const{
     return height(r);
 }
 
-//TODO
 //三种遍历的非递归实现
+template<typename T>
+void binaryTree<T>::preOrderNRecur()const{
+    linkStack<node*> stack;
+    node * temp;
+    stack.push(r);
+    while(!stack.isEmpty()){
+        temp = stack.pop();
+        cout<<temp->data<<' ';
+        if(temp->left){
+            stack.push(temp->left );
+        }
+        if(temp->right ){
+            stack.push(temp->right );
+        }
+    }
+}
+
+template<typename T>
+void binaryTree<T>::midOrderNRecur()const{
+    linkStack<StNode*> stack;
+    StNode temp(r);
+    stack.push(r);
+    while(!stack.isEmpty()){
+        temp = stack.pop();
+        if(++temp->timesPop==2){ // 第二次出栈
+            cout<<temp->data<<' ';
+            if(temp->right!=nullptr ){
+                stack.push(temp->right );
+            }
+        }else{
+            stack.push(temp);
+            if(temp->left!=nullptr ){
+                stack.push(temp->left );
+            }
+        }
+    }
+}
+
+template<typename T>
+void binaryTree<T>::postOrderNRecur()const{
+    linkStack<StNode*> stack;
+    StNode temp(r);
+    stack.push(r);
+    while(!stack.isEmpty()){
+        temp = stack.pop();
+        if(++temp->timesPop==3){
+            cout<<temp->data<<' ';
+            continue;
+        }
+        stack.push(temp);
+        if(temp->timesPop==1){ // 第一次出栈
+            if(temp->left!=nullptr ){
+                stack.push(temp->left );
+            }
+        }else{ // 第二次
+            if(temp->right!=nullptr ){
+                stack.push(temp->right );
+            }
+        }
+    }
+}
 
