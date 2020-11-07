@@ -10,7 +10,7 @@ Cpp implementation codes of data structures in course CS031
 - dLinkList 双链表
 - cLinkList 循环链表
 
-**methods**
+*methods **
 - void clear()
 - int length()const;
 - void insert(int i, const T&x)
@@ -40,8 +40,9 @@ methods
 - T getHead()const;
 
 ## Tree
-- seqBinaryTree
+- seqBinaryTree // 未实现
 - binaryTree
+- hfTree // huffman tree
 
 methods
 - void clear()const;
@@ -59,6 +60,11 @@ methods
 - int size()const;
 - int height()const;
 - friend void printTree(const binaryTree<T>&t, T flag );
+- void preOrderNRecur()const; //非递归实现
+- void midOrderNRecur()cosnt;
+- void postOrderNRecur()const;
+- void getCode(hfCode result[]); // 从huffman树生成huffman编码
+
 
 # Reference
 数据结构：思想与实现，上海交通大学出版社

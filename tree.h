@@ -8,6 +8,8 @@ Content: definition of tree structure
 
 #ifndef CLIONPROJECT_TREE_H
 #define CLIONPROJECT_TREE_H
+#include<string>
+using namespace std;
 
 template <typename T>
 class tree {
@@ -107,6 +109,27 @@ public:
 };
 
 
+// huffman Tree
+template<typename T>
+class hfTree{
+    private:
+        struct node{
+            T data;
+            int weight;
+            int parent, left, right;
+        };
+        node* elem;
+        int length;
+    public:
+        struct hfCode{ // 保存huffman编码的类型
+            T data;
+            string code;
+        }; 
+        hfTree(const T*x, const int*w, int size);
+        void getCode(hfCode result[]);
+        ~hfTree(){delete [] elem;}
+
+}
 
 
 

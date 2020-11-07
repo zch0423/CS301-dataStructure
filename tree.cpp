@@ -8,6 +8,7 @@ Content: implementation of tree especially binaryTree
 
 #include "tree.h"
 #include<iostream>
+#include<string>
 
 using namespace std;
 // 队列 遍历用
@@ -390,6 +391,68 @@ void binaryTree<T>::postOrderNRecur()const{
             if(temp->right!=nullptr ){
                 stack.push(temp->right );
             }
+        }
+    }
+}
+
+template<typename T>
+hfTree<T>::hfTree(const T*x, const int *w, int size ){
+    const int MAX_INT = 32767;
+    int min1, min2; //最小、次小树的权值
+    int x, y; //最小、次小树下标
+    
+    // initialize
+    length = size*2; //2n-1
+    elem = new node[length];
+    for(int i=size;i<length;++i){
+        elem[i].weight = w[i-size];
+        elem[i].data = v[i-size ];
+        elem[i].parent = elem[i].left = elem[i].right = 0;
+    }
+    //merge
+    for(i=size-1;i>0;--i){
+        min1 = min2 = MAX_INT;
+        x = y = 0;
+        for(int j=i+1;j<length;++j){
+            if(elem[j].parent==0){//没被合并过
+                if(elem[j].weight<min1 ){
+                    min2 = min1;
+                    min1 = elem[j].weight;
+                    x = y;
+                    y = j;
+                }else if(elem[j].weight<min2 ){
+                    // 次小
+                    min2 = elem[j].weight;
+                    x = j;
+                }
+            }
+        }
+        elem[i].weight = min1+min2;
+        elem[i].left = x;
+        elem[i].right = y;
+        elem[i].parent = 0;
+        elem[x].parent = i;
+        elem[y].parent = i;
+    }
+}
+
+template<typename T>
+void hfTree<T>::getCode(hfCode result[]){
+    int size = length/2;
+    int p,s; // p refers to parent node
+    for(int i=size;i<length;++i){// 每个待编码符号
+        result[i-size].data = elem[i].data;
+        result[i-size].code = "";
+        p = elem[i].parent;
+        s = i;
+        while(p){//从根出发，左边为0，右边为1
+            if(elem[p].left==s){
+                result[i-size].code = '0'+result[i-size].code;
+            }else{
+                result[i-size].code = '1'+result[i-size].code;
+            }
+            s = p;
+            p = elem[p].parent;
         }
     }
 }
