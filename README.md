@@ -61,9 +61,20 @@ methods
 - int height()const;
 - friend void printTree(const binaryTree<T>&t, T flag );
 - void preOrderNRecur()const; //非递归实现
-- void midOrderNRecur()cosnt;
+- void midOrderNRecur()const;
 - void postOrderNRecur()const;
 - void getCode(hfCode result[]); // 从huffman树生成huffman编码
+
+## priorityQueue
+- priorityQueue //二叉堆
+- leftHeap //左堆
+
+method
+- bool isEmpty()const;
+- void enQueue(const T&x);
+- T deQueue();
+- T getHead()const;
+- void merge(leftHeap<T> * other); // 左堆的合并
 
 
 # Reference
