@@ -84,10 +84,10 @@ method
 - RedBlackTree //红黑树
 
 method
-- seqSearch // 顺序查找
+- seqSearch // 无序查找
+- orderSeqSearch //顺序查找
 - binarySearch // 二分查找
-- //插值查找
-- //分块查找
+- insertSearch //分块查找
 - find //动态查找表
 - insert
 - remove 
