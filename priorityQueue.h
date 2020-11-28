@@ -18,7 +18,7 @@ class priorityQueue{
         T deQueue();
         T getHead()const;
     private:
-        int currentLength;
+        int currentSize;
         T* elem;
         int maxSize;
         void doubleSpace();

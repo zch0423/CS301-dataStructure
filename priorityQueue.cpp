@@ -7,7 +7,7 @@
 #include "priorityQueue.h"
 template<typename T>
 priorityQueue<T>::priorityQueue(int capacity=100){
-    elem = new T[capacity ];
+    elem = new T[capacity+1];
     maxSize = capacity;
     currentSize = 0;
 }

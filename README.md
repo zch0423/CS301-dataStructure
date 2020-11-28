@@ -10,7 +10,7 @@ Cpp implementation codes of data structures in course CS031
 - dLinkList 双链表
 - cLinkList 循环链表
 
-*methods **
+methods
 - void clear()
 - int length()const;
 - void insert(int i, const T&x)
@@ -75,6 +75,24 @@ method
 - T deQueue();
 - T getHead()const;
 - void merge(leftHeap<T> * other); // 左堆的合并
+
+## set
+- Set // 集合
+- DynamicSearchTable // 动态查找表
+- BinarySearchTree
+- AvlTree //AVL树
+- RedBlackTree //红黑树
+
+method
+- seqSearch // 顺序查找
+- binarySearch // 二分查找
+- //插值查找
+- //分块查找
+- find //动态查找表
+- insert
+- remove 
+- makeEmpty
+
 
 
 # Reference
