@@ -18,7 +18,8 @@ struct SET{
 template<typename KEY, typename OTHER>
 int seqSearch(SET<KEY, OTHER> data[], int size, const KEY&x){
     data[0].key = x;
-    for(int i=size;x!=data[i].key;--i);
+    int i;
+    for(i=size;x!=data[i].key;--i);
     return i;
 }
 
@@ -26,7 +27,8 @@ int seqSearch(SET<KEY, OTHER> data[], int size, const KEY&x){
 template<typename KEY, typename OTHER>
 int orderSeqSearch(SET<KEY, OTHER> data[], int size, const KEY&x){
     data[0].key = x;
-    for(int i=size;x<data[i].key;--i);
+    int i;
+    for(i=size;x<data[i].key;--i);
     if(x==data[i].key)return i;
     else return 0;
 }
@@ -48,7 +50,7 @@ int binarySearch(SET<KEY, OTHER>data [], int size, const KEY&x){
 
 
 template<typename KEY, typename OTHER>
-int insertSearch(SET<KEY, OTHER> datap[], int size, const KEY&x){
+int insertSearch(SET<KEY, OTHER> data[], int size, const KEY&x){
     // 插值查找
     int low = 1, high=size;
     int next;
@@ -63,5 +65,39 @@ int insertSearch(SET<KEY, OTHER> datap[], int size, const KEY&x){
     return 0;
 }
 
+// 动态查找表
+template<typename KEY, typename OTHER>
+class dynamicSearchTable {
+public:
+    virtual SET<KEY, OTHER> *find(const KEY &x) const = 0;
+    virtual void insert(const SET<KEY, OTHER> &x) = 0;
+    virtual void remove(const KEY &x) = 0;
+    virtual ~dynamicSearchTable() = default;
+};
 
+// 二叉查找树
+template<typename KEY, typename OTHER>
+class BinarySearchTree:public dynamicSearchTable<KEY, OTHER>{
+private:
+    struct BinaryNode{
+        SET<KEY, OTHER> data;
+        BinaryNode *left;
+        BinaryNode *right;
+        BinaryNode(const SET<KEY, OTHER>&d, BinaryNode*l= nullptr, BinaryNode*r= nullptr):data(d),left(l),right(r){}
+    };
+    BinaryNode*root;
+
+    void insert(const SET<KEY, OTHER>&x, BinaryNode* &t);
+    void remove(const KEY&x, BinaryNode* &t);
+    SET<KEY,OTHER> * find(const KEY&x, BinaryNode*t)const;
+    void makeEmpty(BinaryNode*t);
+
+public:
+    BinarySearchTree();
+    ~BinarySearchTree();
+    SET<KEY,OTHER>*find(const KEY&x)const;
+    void insert(const SET<KEY,OTHER>&x);
+    void remove(const KEY&x);
+
+};
 #endif // HEADlookUpTable

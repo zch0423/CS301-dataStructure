@@ -81,7 +81,7 @@ method
 - DynamicSearchTable // 动态查找表
 - BinarySearchTree
 - AvlTree //AVL树
-- RedBlackTree //红黑树
+- RedBlackTree //红黑树暂未实现
 
 method
 - seqSearch // 无序查找
