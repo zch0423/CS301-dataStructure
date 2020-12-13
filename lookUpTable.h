@@ -100,4 +100,39 @@ public:
     void remove(const KEY&x);
 
 };
+
+// AVL树
+// 左右子树高度相差不超过1
+template<typename KEY, typename OTHER>
+class AvlTree:public dynamicSearchTable<KEY,OTHER>{
+private:
+    struct AvlNode{
+        SET<KEY,OTHER>data;
+        AvlNode* left;
+        AvlNode* right;
+        int height;
+        AvlNode(const SET<KEY,OTHER> & element, AvlNode*l= nullptr, AvlNode*r= nullptr, int h=1):data(element),left(l),right(r),height(h){}
+    };
+    AvlNode* root;
+
+    void insert(const SET<KEY,OTHER>&x, AvlNode*&t);
+    bool remove(const KEY&x, AvlNode*&t);
+    void makeEmpty(AvlNode*t);
+    int height(AvlNode* t)const {return t== nullptr?0:t->height;}
+    void LL(AvlNode*&t);
+    void LR(AvlNode*&t);
+    void RL(AvlNode*&t);
+    void RR(AvlNode*&t);
+    int max(int a, int b){return (a>b)?a:b;}
+    bool adjust(AvlNode*&t, int subTree);
+
+public:
+    AvlTree();
+    ~AvlTree();
+    SET<KEY,OTHER>* find(const KEY&x)const;
+    void insert(const SET<KEY,OTHER>&x);
+    void remove(const KEY&x);
+};
+
+
 #endif // HEADlookUpTable

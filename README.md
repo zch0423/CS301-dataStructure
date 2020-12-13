@@ -82,6 +82,8 @@ method
 - BinarySearchTree
 - AvlTree //AVL树
 - RedBlackTree //红黑树暂未实现
+- closeHashTable //闭散列表
+- openHashTable //开散列表
 
 method
 - seqSearch // 无序查找
